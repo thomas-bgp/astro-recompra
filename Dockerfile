@@ -6,7 +6,7 @@ RUN pip install --no-cache-dir streamlit pandas numpy plotly openpyxl pyarrow
 
 COPY dashboard_recompra.py .
 COPY vendas_tiny_bu.parquet .
-COPY "Astro ADS.xlsx" .
+COPY astro_ads.xlsx .
 
 EXPOSE 8501
 

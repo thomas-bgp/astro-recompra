@@ -15,7 +15,9 @@ from pathlib import Path
 import re
 
 DATA_PATH = Path(__file__).parent / "vendas_tiny_bu.parquet"
-ADS_PATH = Path(__file__).parent / "Astro ADS.xlsx"
+_ads_new = Path(__file__).parent / "astro_ads.xlsx"
+_ads_old = Path(__file__).parent / "Astro ADS.xlsx"
+ADS_PATH = _ads_new if _ads_new.exists() else _ads_old
 
 STATE_MAP = {
     'State of Acre': 'AC', 'State of Alagoas': 'AL', 'State of Amapa': 'AP',
