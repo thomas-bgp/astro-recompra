@@ -53,7 +53,9 @@ def _extract_marca(camp):
         return 'Cartom'
     return None
 
-st.set_page_config(page_title="Astro — A História da Recompra", layout="wide")
+_MULTIPAGE = False
+if not _MULTIPAGE:
+    st.set_page_config(page_title="Astro — A História da Recompra", layout="wide")
 
 # ═══════════════════════════════════════
 # STYLING — dark mode native

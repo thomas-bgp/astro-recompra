@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+screenshots/
+build_docx.py
+Astro_Campanhas_x_Vendas_Cola.docx
+RELATORIO_CAMPANHAS_VENDAS.md
