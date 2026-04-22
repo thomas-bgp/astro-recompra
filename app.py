@@ -12,8 +12,16 @@ st.set_page_config(
     layout="wide",
 )
 
-# Rota oculta: /?view=abc renderiza a Curva ABC sem aparecer no menu lateral.
+# Rota oculta: /?view=abc renderiza a Curva ABC sem menu multipage.
 if st.query_params.get("view") == "abc":
+    st.markdown(
+        """
+        <style>
+            [data-testid="stSidebarNav"] { display: none !important; }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
     import abc_curva
     abc_curva.main()
     st.stop()
