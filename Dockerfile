@@ -14,6 +14,7 @@ COPY astro_ads.xlsx .
 COPY dashboard_recompra.py .
 COPY dashboard_campanhas.py .
 COPY dashboard_agressividade.py .
+COPY abc_curva.py .
 
 # Multi-page entry
 COPY app.py .

@@ -12,6 +12,12 @@ st.set_page_config(
     layout="wide",
 )
 
+# Rota oculta: /?view=abc renderiza a Curva ABC sem aparecer no menu lateral.
+if st.query_params.get("view") == "abc":
+    import abc_curva
+    abc_curva.main()
+    st.stop()
+
 st.markdown("""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
