@@ -19,7 +19,7 @@ STATUS_EXCLUI_PADRAO = ["Cancelado"]
 def _load_data() -> pd.DataFrame:
     df = pd.read_parquet(
         DATA_PATH,
-        columns=["data_pedido", "valor_rateado", "seo_title", "situacao", "quantidade"],
+        columns=["data_pedido", "valor_rateado", "seo_title", "situacao", "quantidade", "codigo"],
     )
     df["data_pedido"] = pd.to_datetime(df["data_pedido"], errors="coerce").dt.date
     df["valor_rateado"] = pd.to_numeric(df["valor_rateado"], errors="coerce")
@@ -43,6 +43,7 @@ def _build_abc(df: pd.DataFrame) -> pd.DataFrame:
             faturamento=("valor_rateado", "sum"),
             quantidade=("quantidade", "sum"),
             pedidos=("valor_rateado", "size"),
+            sku=("codigo", "first"),
         )
         .sort_values("faturamento", ascending=False)
         .reset_index(drop=True)
@@ -57,7 +58,8 @@ def _build_abc(df: pd.DataFrame) -> pd.DataFrame:
         agg["pct_acum"] = agg["pct"].cumsum()
         agg["classe"] = _classify_abc(agg["pct_acum"])
     agg.insert(0, "rank", range(1, len(agg) + 1))
-    return agg
+    cols = ["rank", "sku", "seo_title", "faturamento", "quantidade", "pedidos", "pct", "pct_acum", "classe"]
+    return agg[cols]
 
 
 def _to_excel_bytes(abc: pd.DataFrame, resumo: pd.DataFrame, periodo: str) -> bytes:
